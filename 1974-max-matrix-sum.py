@@ -37,7 +37,7 @@ n == matrix.length == matrix[i].length
     """
     def maxMatrixSum(self, matrix: List[List[int]]) -> int:
         neg_count = 0
-        min_abs = 0
+        min_abs  = float('inf')
 
         abs_sum = 0
 
@@ -54,4 +54,23 @@ n == matrix.length == matrix[i].length
         
 
         return abs_sum
-        
+
+
+
+class Solution2:
+    def maxMatrixSum(self, matrix: List[List[int]]) -> int:
+            neg_count = 0
+            abs_sum = 0
+            min_abs = float('inf')
+
+            for row in matrix:
+                for val in row:
+                    if val < 0:
+                        neg_count += 1
+                    abs_sum += abs(val)
+                    min_abs = min(min_abs, abs(val))
+
+            if neg_count % 2 == 1:
+                abs_sum -= 2 * min_abs
+
+            return abs_sum
